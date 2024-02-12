@@ -43,12 +43,27 @@ def file_copy():
     print('Файл скопирован')
 
 
+def info_copy(filename_1):
+    with open(filename_1, 'r', encoding='UTF-8') as main_file:
+        lst = main_file.readlines()
+    for i in lst:
+        print(i)
+    n = int(input('Какую запись (номер строки) хотите скопировать?\n'))
+    nm = input('Имя файла, в которую хотите скопировать информацию, в формате <xxxx.txt>?')
+    lst_1 = lst[n-1].split(';')
+    add_new_user(name=lst_1[1], phone=lst_1[2], filename=nm)
+    print('Информация скопирована')
+    
+
+
+
 INFO_STRING = """
 Выберите ркжим работы:
 1 - вывести все данные
 2 - добавление нового пользователя
 3 - поиск
 4 - копирование телефонной книги в новый файл
+5 - копирование конкретной записи из одного фаила в другой
 """
 
 DATA_SOURCE = 'phones.txt'
@@ -72,4 +87,7 @@ while True:
         exit()
     elif mode == 4:
         file_copy()
+        exit()
+    elif mode == 5:
+        info_copy(DATA_SOURCE)
         exit()
